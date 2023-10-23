@@ -1,0 +1,315 @@
+//define las constantes que representan números de pin y valores.
+#define B 12
+#define A 13
+#define C 7
+#define D 8
+#define E 9
+#define F 10
+#define G 11
+#define interruptor 2
+#define APAGADOS 0
+#define UNIDAD A0
+#define DECENA A1
+#define sensortmp A2
+#define fototstor A5
+#define TIMEDISPLAYON 1
+#define motor 3
+#define UPbttn 4
+#define DOWNbttn 5
+
+// prepara el entorno de trabajo. Aquí se realizan varias tareas importantes
+void setup()
+{
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  
+  pinMode(interruptor, INPUT_PULLUP);
+  pinMode(UPbttn, INPUT_PULLUP);
+  pinMode(DOWNbttn, INPUT_PULLUP);
+  pinMode(motor, OUTPUT);
+  
+  pinMode(UNIDAD, OUTPUT);
+  pinMode(DECENA, OUTPUT);
+  digitalWrite(UNIDAD, 0);
+  digitalWrite(DECENA, 0);
+  
+  Serial.begin(9600);
+}
+//registro de diversas variables y estados.
+
+int countDigit = 0;    //registro del contador
+int sube = 1;		  //rastrear el estado del boton de aumento.
+int baja = 1;		 // rastrear el estado del boton de disminución.
+int subePrevia = 1; // Ayudan a detectar cuándo se presionan o sueltan los botones.
+int bajaPrevia = 1;//  registro del estado anterior de los botones 
+bool numeroPrimo; //   determina si un numero es primo o no 
+int countP = 2;  // Se muestra los numeros primos 
+int lectura = 0;// Almacena la lectura analógica del sensor
+float temperatura = 0; // Calcula la temp en base a la lectura 
+//int valortstor; ??
+
+//Se encarga de encender un LED o un segmento de un display de 7 segmentos.
+void prenderLed(int led){
+	digitalWrite(led, HIGH);
+}
+
+// detecta cual de los botones ha sido presionado. Evita repeticiones
+int keypressed(void)
+{
+    sube = digitalRead(UPbttn);
+    baja = digitalRead(DOWNbttn);
+    if (sube == 1)
+        subePrevia = 1;
+    if (baja)
+        bajaPrevia = 1;
+  
+    if (sube == 0 && sube != subePrevia)
+    {
+        subePrevia = sube;
+        return UPbttn;
+    }
+
+    if (baja == 0 && baja != bajaPrevia)
+    {
+        bajaPrevia = baja;
+        return DOWNbttn;
+    }
+
+    return 0;
+}
+
+///La funcion esPrimo es de tipo booleano, se encarga de recibir
+///un numero y verificar que el numero ingresado por parametro sea
+///un numero primo
+bool esPrimo(int n) {
+  if (n <= 1) {
+    return false;
+  }
+  for (int i = 2; i * i <= n; i++) {
+    if (n % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// se encarga de mostrar un numeros en los display
+void printCount(int count)
+{
+    prendeDigito(APAGADOS);
+    printDigit(count / 10);
+    prendeDigito(DECENA);
+    prendeDigito(APAGADOS);
+    printDigit(count - 10 * ((int)count / 10));
+  prendeDigito(UNIDAD);
+}
+
+///La funcion printDigit se encarga de imprimir en los numeros del 0-9
+///este recibira como parametro una variable de tipo entero
+
+void printDigit(int digit)
+{
+  digitalWrite(A, LOW);
+  digitalWrite(B, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, LOW);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW);
+  digitalWrite(G, LOW);
+  switch (digit)
+  {
+  	case 1:
+  	{
+      prenderLed(B);
+      prenderLed(C);
+      break;
+  	}
+    case 2:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(G);
+      prenderLed(E);
+      prenderLed(D);
+      break;
+  	}
+  
+    case 3:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(G);
+      prenderLed(C);
+      prenderLed(D);
+      break;
+  	}
+    case 4:
+  	{
+      prenderLed(B);
+      prenderLed(F);
+      prenderLed(G);
+      prenderLed(C);
+      break;
+  	}
+    
+    case 5:
+  	{
+      prenderLed(A);
+      prenderLed(F);
+      prenderLed(G);
+      prenderLed(C);
+      prenderLed(D);
+      break;
+  	}
+    case 6:
+  	{
+      prenderLed(A);
+      prenderLed(E);
+      prenderLed(G);
+      prenderLed(C);
+      prenderLed(D);
+      prenderLed(F);
+      break;
+  	}
+    
+    case 7:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(C);
+      break;
+  	}
+     case 8:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(C);
+      prenderLed(F);
+      prenderLed(G);
+      prenderLed(D);
+      prenderLed(E);
+      break;
+  	} 
+     case 9:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(C);
+      prenderLed(F);
+      prenderLed(G);
+      break;
+  	} 
+    
+      case 0:
+  	{
+      prenderLed(A);
+      prenderLed(B);
+      prenderLed(C);
+      prenderLed(D);
+      prenderLed(E);
+      prenderLed(F);
+      break;
+  	}
+  }
+}
+
+///encontrar el siguiente número primo mayor al numero presente
+int siguientePrimo(int n) {
+  n++;
+  while (true) {
+    if (esPrimo(n)) {
+      return n;
+    }
+    n++;
+  }
+}
+///encontrar el anterior número primo mayor al numero presente
+int anteriorPrimo(int n) {
+  n--;
+  while (n >= 2) {
+    if (esPrimo(n)) {
+      return n;
+    }
+    n--;
+  }
+  return n;
+}
+
+// Esta parte del código define una función llamada prendeDigito que controla la multiplexación 
+// de los displays de unidades y decenas, 
+void prendeDigito(int digito)
+{
+    if (digito == UNIDAD)
+    {
+        digitalWrite(UNIDAD, LOW);
+        digitalWrite(DECENA, HIGH);
+        delay(TIMEDISPLAYON);
+    }
+    else if (digito == DECENA)
+    {
+        digitalWrite(UNIDAD, HIGH);
+        digitalWrite(DECENA, LOW);
+        delay(TIMEDISPLAYON);
+    }
+    else
+    {
+        digitalWrite(UNIDAD, HIGH);
+        digitalWrite(DECENA, HIGH);
+    }
+}
+
+//controla el proyecto alternando entre el modo de control 
+//de temperatura y el modo de mostrar números primos. 
+
+void loop() {
+  int pressed = keypressed(); //chequea si algun boton fue presionado 
+  int modo = digitalRead(interruptor); // chequea el modo del interruptor 
+  lectura = analogRead(sensortmp);
+  temperatura = map(lectura,0,1023,-5000,45000); // Mapea este valor en el rango entre 0 y 1023 a un rango de -50°C a 450°C
+  temperatura = temperatura/100.00; //lo divide para obtener el valor en Celcius 
+  if (modo == 1) { //modo de control de temperatura
+    
+    if(temperatura >= 60 && temperatura <= 100){ 
+      digitalWrite(motor, HIGH);
+      Serial.println("La temperatura es optima");
+    }else if (temperatura <= 59 && temperatura >= 20){
+      Serial.println("La temperatura no es optima");
+    }else if(temperatura <= 19 && temperatura >= -20){
+      Serial.println("La temperatura es muy baja");
+    }else{
+      Serial.println("El motor se apago para evitar sobrecalentamiento");
+      digitalWrite(motor, LOW);
+    }
+    printCount(countDigit); //printea los numeros del contador segun cual boton aprete.
+    if (pressed == UPbttn) {
+      countDigit++;
+      if (countDigit > 99) {
+        countDigit = 0;
+      }
+    }else if (pressed == DOWNbttn) {
+      countDigit--;
+      if (countDigit < 0) {
+        countDigit = 99;
+      }
+    }
+  }else if (modo == 0){ //modo activo de numeros primos 
+    digitalWrite(motor, LOW);
+    printCount(countP);
+    if (pressed == UPbttn){
+      countP = siguientePrimo(countP);
+      if (countP > 97){
+        countP = 0;
+      }
+    }else if (pressed == DOWNbttn) {
+      countP = anteriorPrimo(countP);
+      if (countP < 0) {
+        countP = 99;
+      }
+    }
+  }
+}
