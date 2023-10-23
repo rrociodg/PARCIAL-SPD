@@ -15,7 +15,7 @@ El proyecto presentado en esta parte implementa un contador de 0 a 99 utilizando
 
 ## Función principal 
 
-Comenzamos definiendo las variables de las constantes para representan los pines y valores utilizados en el proyecto. 
+Comenzamos definiendo las variables de las constantes para representar los pines y valores utilizados en el proyecto. 
 ~~~ C
 void setup()
 ~~~
@@ -62,11 +62,114 @@ void printDigit(int digit)
 ~~~
 La misma se utiliza para mostrar un numero especifico en los display. La funcion inicialmente los apaga a todos los segmentos  para luego utilizar un “switch” para determinar que segmentos deben encenderse para mostrar el numero correcto. Cada caso corresponde a un numero de 0 al 9. 
 
-## :computer: Link al proyecto.
-- [proyecto](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
+# Segunda parte del parcial domiciliario
 
+## Proyecto: Modificación con Interruptor Deslizante y Números Primos
+[Tinkercad]![arduinoparte1]![PARTE2](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/116bce8d-3d9d-4d7a-8227-97bcec98c7ec)
+
+## Descripción
+En esta parte del proyecto se utiliza el mismo contador que va de 0 a 99 con 2 display de 7 segmentos pero se agrega un sistema de control de temperatura, un motor de CC (corriente continua) y una opcion para visualizar los numeros primos. La opcion de contador o numeros primos esta determinada por un interruptor. En el caso de posicionarse en la parte de contador el sistema ademas de mostrar el cronometro, monitorea la temperatura a través de un sensor y enciende el motor si la temperatura está dentro de un rango deseado para mantenerla en un nivel óptimo. Si se selecciona la opción de numeros primos, se muestran los numeros correspondientes en los displays, y según que boton se presione, o aumenta el numero o lo desciende. Si se llega al limite el mismo se reinicia. 
+
+## Funcion principal 
+
+El comienzo de este proyecto es muy similar al presentado en la parte 1. se comienza el codigo definiendo las constantes que representan numeros de pin y valores. Lo que hacemos es asignar nombres más fáciles de recordar a algunos números de pin y valores que utilizaremos más adelante en el programa. Nos ayudan a organizar nuestro proyecto. 
+
+Se sigue con la  configuracion inician del proyecto definido en el
+~~~ C
+void setup()
+~~~
+Aquí se están configurando varios pines, tanto como entradas como salidas, y se inicia la comunicación serial.
+~~~ C
+"pinMode()
+Serial.begin()
+digitalWrite()"
+~~~
+- Se configuran los pines A, B, C, D, E, F y G, como salidas digitales. 
+- Se configuran varios pines como entradas con resistencias pull-up internas habilitadas( interruptor: Un pin que se usa para leer el estado de un interruptor o botón, UPbttn: Un pin que se utiliza para leer si se presiona un botón de aumento y DOWNbttn: Un pin que se utiliza para leer si se presiona un botón de disminución )
+- Se configura el pin motor como una salida digital.
+- Se configuran los pines UNIDAD y DECENA como salidas digitales.
+- Los pines UNIDAD y DECENA se establecen en un estado LOW al inicio, es decir que esten, apagados
+- Por ultimo, se inicia la comunicacion que permite la depuración para ver información a través del puerto serie.
+
+Finalmente se inicializan varias variables, las cuales se utilizan para rastrear el estado de los botones, controlar el funcionamiento del contador y gestionar la medición de la temperatura y otros sensores en el proyecto. Cada una tiene un propósito específico en el funcionamiento general del programa.
+
+~~~ C
+int countDigit = 0;    //registro del contador
+int sube = 1;		  //rastrear el estado del boton de aumento.
+int baja = 1;		 // rastrear el estado del boton de disminución.
+int subePrevia = 1; // Ayudan a detectar cuándo se presionan o sueltan los botones.
+int bajaPrevia = 1;//  registro del estado anterior de los botones 
+bool numeroPrimo; //   determina si un numero es primo o no 
+int countP = 2;  // Se muestra los numeros primos 
+int lectura = 0;// Almacena la lectura analógica del sensor
+float temperatura = 0;
+~~~
+
+Una vez terminado se continua con la funcion
+~~~ C
+void prenderLed(int led)
+~~~
+La cual funciona exactamente que la parte anterior, en donde la tarea especifica de la funcion es encender el led o segmento especificado. 
+
+~~~ C
+int keypressed(void)
+~~~
+Es la que realiza la detección de si los botones fueron o no presionados, y en caso de que si, devuelve cual ha sido. Para evitar que  se repita, compara el estado actual con el previo. Si no se presiona ninguno devuelve 0.
+
+~~~ C
+bool esPrimo(int n)
+~~~
+Lo que esta funcion hace es chequear si un numero es o no primo. Comienza comprobando si el numero es menor o igual a 1, si es asi devuelve “False” , ya que los numeros primos son positivos. Luego, se realiza la verificacion si el numero “n” es divisible por algun numero entre 2 y la raiz cuadrada de “n”. Si se encuentra un divisor, devuelve “False”, caso contrario, devuelve “True” indicando que el mismo es numero primo. 
+
+Se continua con la funcion 
+~~~ C
+void printCount(int count)
+~~~
+Se encarga de dividir un número en sus partes de decenas y unidades, y luego muestra esas partes en un display de siete segmentos secuencialmente. Esto permite mostrar números de dos dígitos en el display.
+
+~~~ C
+void printDigit(int digit)
+~~~
+Esta funcion prepara a los leds en estado apago y según el numero que corresponda se activan los leds correspondientes. Este proceso se realiza a través de una estructura llamad switch. Esta función es esencial para la representación de dígitos en el display de siete segmentos y se utiliza en combinación con la función prenderLed para mostrar números en el proyecto.
+
+~~~ C
+int siguientePrimo(int n)
+int anteriorPrimo(int n)
+~~~
+En la primera funcion como el nombre lo describe se trata de buscar el siguiente numero primo al que se muestra por display, se utiliza la logica en donde  a partir del número n, aumenta el valor de n en uno y luego entra en un bucle while. En cada iteración se reutiliza la función "esPrimo()". Si es primo, devuelve ese número como el siguiente primo mayor. Si no, lo continua buscando. En la otra funcion, en lugar de aumentar lo disminuye y se asegura que no sea menor a 2 ya que dicho numero es el numero primo más pequeño. 
+
+Al igual que en la parte 1 se volvio a reutilizar la funcion en donde se verifica si se debe mostrar el dígito en el display de unidades (UNIDAD) o en el display de decenas (DECENA).
+~~~ C
+void prendeDigito(int digito)
+~~~
+
+Ya adentrandonos en el final del proyecto se inicializa 
+~~~ C
+void loop()
+~~~
+Que como ya dijimos es el encargado de ejecutar continuamente nuestro programa hasta que el mismo finalice. El mismo consta de varias partes:
+~~~ C
+int pressed = keypressed()
+para saber si fueron los botones presionados
+~~~
+
+~~~ C
+int modo = digitalRead(interruptor)
+lee el estado del interrumptor para saber en que modo operar.
+~~~
+Si el interruptor se encuentra en el modo 1 significa que el proyecto esta en modo de control de temperturas, y va a verirficar el estado de la misma. En el caso de que la temperatura no sea optima el motor se apaga. La temperatura  es leida en un valor analogico del sensor de temperatura(sensortmp), y el codigo  mapea este valor en el rango entre 0 y 1023 a un rango de -50°C a 450°C, y luego lo divide por 100 para obtener la temperatura en grados Celsius y la almacena en la variable "temperatura". Si al contrario, el interruptor esta en modo 0, significa que el proyecto esta en numeros primos. Si se presiona el boton para incrementar el numero aumenta tratando de no superar el 97, si se presiona al contrario el que disminuye, decrece su valor teniendo como limite el 0, para que los numeros aparezcan por los display se llama a la funcion “printCount()” para mostrar el valor actual. 
+
+## Explicación de la elección del motor CC y el sensor de temperatura
+El motor de corriente continua o motor de corriente directa es un dispositivo con la capacidad de convertir energía eléctrica en movimiento o trabajo mecánico a través de fuerzas electromagnéticas. Estos motores son ampliamente utilizados en aplicaciones donde se necesita un control preciso de la velocidad y puede ser aprovechado en objetos que requieran movimiento, tales como aparatos de uso cotidiano como juguetes y electrodomésticos, pero también en maquinaria industrial. Lo elegimos para nuestro proyecto ya que los motores de CC son conocidos por su eficiencia energética, lo que significa que pueden realizar tareas mecánicas con menor consumo de energía en comparación con algunos motores de aficionado, y además pueden ser más versátiles en términos de diseño y se pueden adaptar a diferentes aplicaciones. El sensor de temperatura lo consideramos una elección sumamente importante ya que permita monitorear la temperatura constantemente, inclusive lo hace más seguro, ya que si supera la tempertura ideal el mismo se para para evitar daños. 
+
+## :computer: Link a las partes del proyecto
+- [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
+- [PARTE2]
+- [PARTE3]
+  
 ## :space_invader: Fuentes
 
 - [Como documentar en Github](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+- [Motor de CC](https://sdindustrial.com.mx/blog/motor-de-corriente-continua/)
 
 
