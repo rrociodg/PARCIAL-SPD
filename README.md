@@ -170,11 +170,11 @@ El motor de corriente continua es un dispositivo con la capacidad de convertir e
 ![arduinoparte3fototransitor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/58ad46a5-ca35-4489-899f-68e8904ccb1f)
 
 ## Funcion del fotodiodo
-Un fotodiodo es un dispositivo semiconductor que, en términos sencillos, es como un pequeño sensor de luz. Está diseñado para convertir la luz en electricidad. Funciona en base al principio del "efecto fotovoltaico", lo que significa que cuando la luz incide sobre él, genera electricidad. El fotodiodo, en este proyecto, se utiliza para medir la intensidad de la luz ambiental en el entorno. El valor leído por el fotodiodo se convierte en una señal eléctrica que se puede usar para diferentes decisiones. La lectura de la intensidad de la luz ambiental mediante el fotodiodo se realiza de la siguiente manera
+Un fotodiodo es un dispositivo semiconductor que, en términos sencillos, es como un pequeño sensor de luz. Está diseñado para convertir la luz en electricidad. Funciona en base al principio del "efecto fotovoltaico", lo que significa que cuando la luz incide sobre él, genera electricidad. El fotodiodo, en este proyecto, se utiliza para medir la intensidad de la luz en el entorno. El valor leído por el fotodiodo se convierte en una señal eléctrica que se puede usar para diferentes decisiones. La lectura de la intensidad de la luz mediante el fotodiodo se realiza de la siguiente manera:
 ~~~ C
-int lecturaFotodiodo = analogRead(fototstor);
+int lecturaFotodiodo = analogRead(sensor);
 ~~~
-Luego toma decisiones segun el valor indicado, dependiendo la intensidad de la luz indicada, realizara diferentes acciones.
+Luego toma decisiones segun el valor indicado, dependiendo la intensidad de la luz, realizara diferentes acciones.
 ~~~ C
    
     if (lecturaFotodiodo > 800) {
@@ -186,10 +186,15 @@ Luego toma decisiones segun el valor indicado, dependiendo la intensidad de la l
     }
 ~~~
 
+## Funcion del fototransistor
+
+El fototransistor agregado a la parte tres, es un semiconductor donde su funcion es detectar la intensidad de luz ambiental. Por su nombre similiar al de un transistor a diferencia de este se controla por la luz ingresada al sensor.
+
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
 - [PARTE2](https://www.tinkercad.com/things/2dnIPh4puuS-parte2-parcial-/editel)
 - [PARTE3-FOTODIODO](https://www.tinkercad.com/things/l478FNkO91X-parte3-fotodiodo/editelsharecode=1HDkmttMVKUtayZpagTi39exdRXy2OaSJeZjw96aE8Q)
+- [PARTE3-FOTOTRANSISTOR](https://www.tinkercad.com/things/4VnTgtksKmE-copy-of-copy-of-copy-of-parte-1-spd/editel?sharecode=3ksGDfHUcPz2qOsi7KTN2c4CyMPwowokdw0__vIMKR4)
   
 ## :space_invader: Fuentes
 
