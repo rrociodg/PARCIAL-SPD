@@ -7,7 +7,7 @@
 
 ## Proyecto: Contador de 0 a 99 con display de 7 segmentos y multiplexación.
 
-[Tinkercad]![arduinoparte1](https://github.com/rrociodg/Parte-1-SPD-/assets/139300487/8a63f921-4d1e-4ce3-b3dd-49bccc802d0e)
+![arduinoparte1](https://github.com/rrociodg/Parte-1-SPD-/assets/139300487/8a63f921-4d1e-4ce3-b3dd-49bccc802d0e)
 
 ## Descripción
 
@@ -65,7 +65,7 @@ La misma se utiliza para mostrar un numero especifico en los display. La funcion
 # Segunda parte del parcial domiciliario
 
 ## Proyecto: Modificación con Interruptor Deslizante y Números Primos
-[Tinkercad]![arduinoparte1]![PARTE2](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/116bce8d-3d9d-4d7a-8227-97bcec98c7ec)
+![arduinoparte2][arduinoparte1]![PARTE2](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/116bce8d-3d9d-4d7a-8227-97bcec98c7ec)
 
 ## Descripción
 En esta parte del proyecto se utiliza el mismo contador que va de 0 a 99 con 2 display de 7 segmentos pero se agrega un sistema de control de temperatura, un motor de CC (corriente continua) y una opcion para visualizar los numeros primos. La opcion de contador o numeros primos esta determinada por un interruptor. En el caso de posicionarse en la parte de contador el sistema ademas de mostrar el cronometro, monitorea la temperatura a través de un sensor y enciende el motor si la temperatura está dentro de un rango deseado para mantenerla en un nivel óptimo. Si se selecciona la opción de numeros primos, se muestran los numeros correspondientes en los displays, y según que boton se presione, o aumenta el numero o lo desciende. Si se llega al limite el mismo se reinicia. 
