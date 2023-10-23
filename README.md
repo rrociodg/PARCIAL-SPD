@@ -160,8 +160,8 @@ lee el estado del interrumptor para saber en que modo operar.
 ~~~
 Si el interruptor se encuentra en el modo 1 significa que el proyecto esta en modo de control de temperturas, y va a verirficar el estado de la misma. En el caso de que la temperatura no sea optima el motor se apaga. La temperatura  es leida en un valor analogico del sensor de temperatura(sensortmp), y el codigo  mapea este valor en el rango entre 0 y 1023 a un rango de -50°C a 450°C, y luego lo divide por 100 para obtener la temperatura en grados Celsius y la almacena en la variable "temperatura". Si al contrario, el interruptor esta en modo 0, significa que el proyecto esta en numeros primos. Si se presiona el boton para incrementar el numero aumenta tratando de no superar el 97, si se presiona al contrario el que disminuye, decrece su valor teniendo como limite el 0, para que los numeros aparezcan por los display se llama a la funcion “printCount()” para mostrar el valor actual. 
 
-## Explicación de la elección del motor CC y el sensor de temperatura
-El motor de corriente continua o motor de corriente directa es un dispositivo con la capacidad de convertir energía eléctrica en movimiento o trabajo mecánico a través de fuerzas electromagnéticas. Estos motores son ampliamente utilizados en aplicaciones donde se necesita un control preciso de la velocidad y puede ser aprovechado en objetos que requieran movimiento, tales como aparatos de uso cotidiano como juguetes y electrodomésticos, pero también en maquinaria industrial. Lo elegimos para nuestro proyecto ya que los motores de CC son conocidos por su eficiencia energética, lo que significa que pueden realizar tareas mecánicas con menor consumo de energía en comparación con algunos motores de aficionado, y además pueden ser más versátiles en términos de diseño y se pueden adaptar a diferentes aplicaciones. El sensor de temperatura lo consideramos una elección sumamente importante ya que permita monitorear la temperatura constantemente, inclusive lo hace más seguro, ya que si supera la tempertura ideal el mismo se para para evitar daños. 
+## :question: Explicación de la elección del motor CC y el sensor de temperatura
+El motor de corriente continua es un dispositivo con la capacidad de convertir energía eléctrica en trabajo mecánico a través de fuerzas electromagnéticas. Estos motores son ampliamente utilizados en aplicaciones donde se necesita un control preciso de la velocidad y puede ser aprovechado en objetos que requieran movimiento, tales como aparatos de uso cotidiano como juguetes y electrodomésticos, pero también en maquinaria industrial en menor escala. Lo elegimos para nuestro proyecto ya que los motores de CC son conocidos por su eficiencia energética, lo que significa que pueden realizar tareas mecánicas con menor consumo de energía en comparación con algunos motores de aficionado, y además pueden ser más versátiles en términos de diseño y se pueden adaptar a diferentes aplicaciones. El sensor de temperatura lo consideramos una elección sumamente importante ya que permite monitorear la temperatura constantemente, inclusive lo hace más seguro, ya que si supera la tempertura ideal el mismo se detiene para evitar daños.
 
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
@@ -172,5 +172,8 @@ El motor de corriente continua o motor de corriente directa es un dispositivo co
 
 - [Como documentar en Github](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 - [Motor de CC](https://sdindustrial.com.mx/blog/motor-de-corriente-continua/)
+- [Sensor luz ambiental](https://www.youtube.com/watch?v=kv6r6HzJDqw)
+- [Sensor de temperatura TMP36](https://www.youtube.com/watch?v=jq7vRrz2PKA)
+- [Control del motor CC](https://youtube.com/watch?v=fJKPeiwi0Pc)
 
 
