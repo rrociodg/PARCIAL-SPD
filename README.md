@@ -163,10 +163,33 @@ Si el interruptor se encuentra en el modo 1 significa que el proyecto esta en mo
 ## :question: Explicación de la elección del motor CC y el sensor de temperatura
 El motor de corriente continua es un dispositivo con la capacidad de convertir energía eléctrica en trabajo mecánico a través de fuerzas electromagnéticas. Estos motores son ampliamente utilizados en aplicaciones donde se necesita un control preciso de la velocidad y puede ser aprovechado en objetos que requieran movimiento, tales como aparatos de uso cotidiano como juguetes y electrodomésticos, pero también en maquinaria industrial en menor escala. Lo elegimos para nuestro proyecto ya que los motores de CC son conocidos por su eficiencia energética, lo que significa que pueden realizar tareas mecánicas con menor consumo de energía en comparación con algunos motores de aficionado, y además pueden ser más versátiles en términos de diseño y se pueden adaptar a diferentes aplicaciones. El sensor de temperatura lo consideramos una elección sumamente importante ya que permite monitorear la temperatura constantemente, inclusive lo hace más seguro, ya que si supera la tempertura ideal el mismo se detiene para evitar daños.
 
+# Tercera parte del parcial domiciliario(Fotodiodo-Fototransistor)
+* Fotodiodo
+![arduinoparte3](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/31d09d0e-4664-47bf-8dda-8c1079964559)
+* Fototransistor
+![arduinoparte3fototransitor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/58ad46a5-ca35-4489-899f-68e8904ccb1f)
+
+## Funcion del fotodiodo
+Un fotodiodo es un dispositivo semiconductor que, en términos sencillos, es como un pequeño sensor de luz. Está diseñado para convertir la luz en electricidad. Funciona en base al principio del "efecto fotovoltaico", lo que significa que cuando la luz incide sobre él, genera electricidad. El fotodiodo, en este proyecto, se utiliza para medir la intensidad de la luz ambiental en el entorno. El valor leído por el fotodiodo se convierte en una señal eléctrica que se puede usar para diferentes decisiones. La lectura de la intensidad de la luz ambiental mediante el fotodiodo se realiza de la siguiente manera
+~~~ C
+int lecturaFotodiodo = analogRead(fototstor);
+~~~
+Luego toma decisiones segun el valor indicado, dependiendo la intensidad de la luz indicada, realizara diferentes acciones.
+~~~ C
+   
+    if (lecturaFotodiodo > 800) {
+      analogWrite(motor, 1);  // disminuir la velocidad del motor.
+    } else if (lecturaFotodiodo < 200) {
+      analogWrite(motor, 220);  // aumentar la velocidad del motor.
+    } else {
+      analogWrite(motor, 127);  //velocidad intermedia.
+    }
+~~~
+
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
 - [PARTE2](https://www.tinkercad.com/things/2dnIPh4puuS-parte2-parcial-/editel)
-- [PARTE3]
+- [PARTE3-FOTODIODO](https://www.tinkercad.com/things/l478FNkO91X-parte3-fotodiodo/editelsharecode=1HDkmttMVKUtayZpagTi39exdRXy2OaSJeZjw96aE8Q)
   
 ## :space_invader: Fuentes
 
@@ -175,5 +198,6 @@ El motor de corriente continua es un dispositivo con la capacidad de convertir e
 - [Sensor luz ambiental](https://www.youtube.com/watch?v=kv6r6HzJDqw)
 - [Sensor de temperatura TMP36](https://www.youtube.com/watch?v=jq7vRrz2PKA)
 - [Control del motor CC](https://youtube.com/watch?v=fJKPeiwi0Pc)
+- [¿Que es un fotodiodo?](https://unicrom.com/fotodiodo/)
 
 
