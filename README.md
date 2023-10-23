@@ -65,16 +65,17 @@ La misma se utiliza para mostrar un numero especifico en los display. La funcion
 # Segunda parte del parcial domiciliario
 
 ## Proyecto: Modificación con Interruptor Deslizante y Números Primos
-![arduinoparte2][arduinoparte1]![PARTE2](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/116bce8d-3d9d-4d7a-8227-97bcec98c7ec)
+
+![arduinoparte2](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/116bce8d-3d9d-4d7a-8227-97bcec98c7ec)
 
 ## Descripción
 En esta parte del proyecto se utiliza el mismo contador que va de 0 a 99 con 2 display de 7 segmentos pero se agrega un sistema de control de temperatura, un motor de CC (corriente continua) y una opcion para visualizar los numeros primos. La opcion de contador o numeros primos esta determinada por un interruptor. En el caso de posicionarse en la parte de contador el sistema ademas de mostrar el cronometro, monitorea la temperatura a través de un sensor y enciende el motor si la temperatura está dentro de un rango deseado para mantenerla en un nivel óptimo. Si se selecciona la opción de numeros primos, se muestran los numeros correspondientes en los displays, y según que boton se presione, o aumenta el numero o lo desciende. Si se llega al limite el mismo se reinicia. 
 
 ## Funcion principal 
 
-El comienzo de este proyecto es muy similar al presentado en la parte 1. se comienza el codigo definiendo las constantes que representan numeros de pin y valores. Lo que hacemos es asignar nombres más fáciles de recordar a algunos números de pin y valores que utilizaremos más adelante en el programa. Nos ayudan a organizar nuestro proyecto. 
+El comienzo de este proyecto es muy similar al presentado en la parte 1. Se comienza el codigo definiendo las constantes que representan numeros de pin y valores. Nos ayudan a organizar nuestro proyecto. 
 
-Se sigue con la  configuracion inician del proyecto definido en el
+Se sigue con la  configuracion inicial del proyecto definido en el
 ~~~ C
 void setup()
 ~~~
@@ -164,7 +165,7 @@ El motor de corriente continua o motor de corriente directa es un dispositivo co
 
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
-- [PARTE2]
+- [PARTE2](https://www.tinkercad.com/things/2dnIPh4puuS-parte2-parcial-/editel)
 - [PARTE3]
   
 ## :space_invader: Fuentes
