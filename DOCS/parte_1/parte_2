@@ -1,0 +1,314 @@
+// C++ code
+
+///Esta parte del código se encarga de definir constantes que representan los pines y valores utilizados en el proyecto. 
+///Las letras: representan los pines del display de 7 segmentos.
+///UPbttn, DOWNbttn, RESETbttn: representan los pines a los que se conectan los botones utilizados para aumentar, disminuir o restablecer el contador. 
+///UNIDAD, DECENA:  Estos pines controlan qué display se está utilizando para mostrar el dígito en un momento dado.
+/// APAGADOS: Representa un valor utilizado para apagar todos los segmentos del display cuando no se está mostrando ningún número.
+///TIMEDISPLAYON: Determina cuánto tiempo se muestra un dígito en el display antes de cambiar al siguiente. 
+
+#define B 12
+#define A 13
+#define C 7
+#define D 8
+#define E 9
+#define F 10
+#define G 11
+#define UPbttn 4
+#define DOWNbttn 5
+#define RESETbttn 6
+#define UNIDAD A0
+#define DECENA A1
+#define APAGADOS 0
+#define TIMEDISPLAYON 10
+
+//la función setup() se encarga de configurar los pines, 
+//y preparar el entorno para el funcionamiento 
+//del contador de 0 a 99 con displays de 7 segmentos y botones.
+
+void setup()
+{
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(4, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP);
+  pinMode(6, INPUT_PULLUP);
+  pinMode(UNIDAD, OUTPUT);
+  pinMode(DECENA, OUTPUT);
+  digitalWrite(UNIDAD, 0);
+  digitalWrite(DECENA, 0);
+  Serial.begin(9600);
+}
+// Estas líneas de código inicializan variables que se utilizan para llevar un registro 
+//de diferentes estados y acciones en el programa
+int sube = 1; 
+int baja = 1;
+int reset = 1;
+int countDigit = 0;    
+int subePrevia = 1;   
+int bajaPrevia = 1;    
+int resetPrevia = 1;
+
+//Se encarga de encender un LED o un segmento de un display de 7 segmentos.
+void prenderLed(int led){
+	digitalWrite(led, HIGH);
+	}
+
+// Se definen las funciones para representar los numeros del 0 al 9
+void prenderNumero0(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(C);
+  	prenderLed(D);
+  	prenderLed(E);
+  	prenderLed(F);
+}
+
+void prenderNumero1(){
+  	prenderLed(B);
+  	prenderLed(C);
+}
+void prenderNumero2(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(G);
+  	prenderLed(E);
+  	prenderLed(D);
+}
+
+void prenderNumero3(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(C);
+  	prenderLed(D);
+  	prenderLed(G);
+}
+
+void prenderNumero4(){
+  	prenderLed(B);
+  	prenderLed(F);
+  	prenderLed(G);
+  	prenderLed(C);
+}
+
+void prenderNumero5(){
+  	prenderLed(A);
+  	prenderLed(F);
+  	prenderLed(G);
+  	prenderLed(C);
+  	prenderLed(D);
+}
+
+void prenderNumero6(){
+  	prenderLed(A);
+  	prenderLed(E);
+  	prenderLed(G);
+  	prenderLed(C);
+  	prenderLed(D);
+  	prenderLed(F);
+
+}
+
+void prenderNumero7(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(C);
+}
+
+void prenderNumero8(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(C);
+  	prenderLed(F);
+  	prenderLed(G);
+  	prenderLed(D);
+  	prenderLed(E);
+}
+
+void prenderNumero9(){
+  	prenderLed(A);
+  	prenderLed(B);
+  	prenderLed(C);
+  	prenderLed(F);
+  	prenderLed(G);
+}
+// Se muestra los sectores de los segmentos:
+//A ES ARRIBA
+//B ES DERECHA ARRIBA
+//C ES ABAJO DERECHA
+//D ES ABAJO
+//E ES ABAJO IZQUIERDA
+//F ES IZQUIERDA ARRIBA
+//G ES MEDIO
+
+//se encarga de detectar cuál de los botones (UPbttn, DOWNbttn o RESETbttn) 
+//ha sido presionado y devuelve el botón presionado como resultado. 
+int keypressed(void)
+{
+    sube = digitalRead(UPbttn);
+    baja = digitalRead(DOWNbttn);
+    reset = digitalRead(RESETbttn);
+    if (sube == 1)
+        subePrevia = 1;
+    if (baja)
+        bajaPrevia = 1;
+    if (reset)
+        resetPrevia = 1;
+
+    if (sube == 0 && sube != subePrevia)
+    {
+        subePrevia = sube;
+        return UPbttn;
+    }
+
+    if (baja == 0 && baja != bajaPrevia)
+    {
+        bajaPrevia = baja;
+        return DOWNbttn;
+    }
+
+    if (reset == 0 && reset != resetPrevia)
+    {
+        resetPrevia = reset;
+        return RESETbttn;
+    }
+    return 0;
+}
+// Esta parte del código define una función llamada prendeDigito 
+//que controla la multiplexación 
+// de los displays de unidades y decenas, 
+
+void prendeDigito(int digito)
+{
+    if (digito == UNIDAD)
+    {
+        digitalWrite(UNIDAD, LOW);
+        digitalWrite(DECENA, HIGH);
+        delay(TIMEDISPLAYON);
+    }
+    else if (digito == DECENA)
+    {
+        digitalWrite(UNIDAD, HIGH);
+        digitalWrite(DECENA, LOW);
+        delay(TIMEDISPLAYON);
+    }
+    else
+    {
+        digitalWrite(UNIDAD, HIGH);
+        digitalWrite(DECENA, HIGH);
+    }
+}
+//  función principal del programa, que se ejecuta continuamente
+//  mientras el programa está en funcionamiento. 
+//  Segun lo que se presione hace que diferentes acciones.
+
+void loop()
+{
+    int pressed = keypressed();
+    if (pressed == UPbttn)
+    {
+        countDigit++;
+        if (countDigit > 99)
+            countDigit = 0;
+    }
+    else if (pressed == DOWNbttn)
+    {
+        countDigit--;
+        if (countDigit < 0)
+            countDigit = 99;
+    }
+    else if (pressed == RESETbttn)
+    {
+        countDigit = 0;
+    }
+
+    printCount(countDigit);
+}
+//Se encarga de mostrar un número en los displays
+void printCount(int count)
+{
+    prendeDigito(APAGADOS);
+    printDigit(count / 10);
+    prendeDigito(DECENA);
+    prendeDigito(APAGADOS);
+    printDigit(count - 10 * ((int)count / 10));
+  prendeDigito(UNIDAD);
+}
+
+//Enciende los segmentos específicos para mostrar un número particular. Inicialmente los apaga.  
+void printDigit(int digit)
+{
+  digitalWrite(A, LOW);
+  digitalWrite(B, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, LOW);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW);
+  digitalWrite(G, LOW);
+  switch (digit)
+  {
+  	case 1:
+  	{
+        prenderNumero1();
+      	break;
+  	}
+    case 2:
+  	{
+        prenderNumero2();
+      	break;
+  	}
+  
+    case 3:
+  	{
+        prenderNumero3();
+      	break;
+  	}
+    case 4:
+  	{
+        prenderNumero4();
+      	break;
+  	}
+    
+    case 5:
+  	{
+        prenderNumero5();
+      	break;
+  	}
+    case 6:
+  	{
+       	prenderNumero6();
+      	break;
+  	}
+    
+    case 7:
+  	{
+       	prenderNumero7();
+      	break;
+  	}
+     case 8:
+  	{
+        prenderNumero8();
+      	break;
+  	} 
+     case 9:
+  	{
+ 		prenderNumero9();
+      	break;
+  	} 
+    
+      case 0:
+  	{
+		prenderNumero0();
+      	break;
+  	}
+    
+    
+  }
+}
+
+  
