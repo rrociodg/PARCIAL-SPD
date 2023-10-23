@@ -189,11 +189,13 @@ Luego toma decisiones segun el valor indicado, dependiendo la intensidad de la l
 ## Funcion del fototransistor
 
 El fototransistor agregado a la parte tres, es un semiconductor donde su funcion es detectar la intensidad de luz ambiental. Por su nombre similiar al de un transistor a diferencia de este se controla por la luz ingresada al sensor.
+
 Luego de definir la entrada analogica al principio, se crea una variable donde se guarda la lectura del fototransistor
 ~~~ C
 valortstor = analogRead(fototstor);
 ~~~
-De la siguiente manera se controla el sensor
+
+Y de la siguiente manera se controla el sensor
 ~~~ C
 if (valortstor < 60) {
       printCount(countDigit);
@@ -204,7 +206,7 @@ if (valortstor < 60) {
 ~~~
 
 
-Luego de definir la entrada analogica al principio, se crea una variable donde se guarda la lectura del fototransistor
+
 
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
