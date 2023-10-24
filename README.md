@@ -167,7 +167,8 @@ El motor de corriente continua es un dispositivo con la capacidad de convertir e
 * Fotodiodo
 ![arduinoparte3](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/31d09d0e-4664-47bf-8dda-8c1079964559)
 * Fototransistor
-![arduinoparte3fototransitor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/58ad46a5-ca35-4489-899f-68e8904ccb1f)
+![fototransistor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/46425e79-d942-4c3b-880d-e65220f8085b)
+
 
 ## Funcion del fotodiodo
 Un fotodiodo es un dispositivo semiconductor que, en términos sencillos, es como un pequeño sensor de luz. Está diseñado para convertir la luz en electricidad. Funciona en base al principio del "efecto fotovoltaico", lo que significa que cuando la luz incide sobre él, genera electricidad. El fotodiodo, en este proyecto, se utiliza para medir la intensidad de la luz en el entorno. El valor leído por el fotodiodo se convierte en una señal eléctrica que se puede usar para diferentes decisiones. La lectura de la intensidad de la luz mediante el fotodiodo se realiza de la siguiente manera:
