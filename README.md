@@ -1,4 +1,4 @@
-# Primera parte del parcial domiciliario
+# :mega: Primera parte del parcial domiciliario
 
 ## Integrantes
 - Ignacio Cruz
@@ -213,6 +213,7 @@ if (valortstor < 60) {
 - [PARTE2](https://www.tinkercad.com/things/2dnIPh4puuS-parte2-parcial-/editel)
 - [PARTE3-FOTODIODO](https://www.tinkercad.com/things/l478FNkO91X-parte3-fotodiodo/editelsharecode=1HDkmttMVKUtayZpagTi39exdRXy2OaSJeZjw96aE8Q)
 - [PARTE3-FOTOTRANSISTOR](https://www.tinkercad.com/things/4VnTgtksKmE-copy-of-copy-of-copy-of-parte-1-spd/editel?sharecode=3ksGDfHUcPz2qOsi7KTN2c4CyMPwowokdw0__vIMKR4)
+- [PARTE4-HEXAGECIMALES](https://www.tinkercad.com/things/ciyrznPqiJ7-parte4-parcial-/editel)
   
 ## :space_invader: Fuentes
 
