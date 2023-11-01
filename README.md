@@ -169,7 +169,7 @@ El motor de corriente continua es un dispositivo con la capacidad de convertir e
 * Fototransistor
 ![fototransistor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/46425e79-d942-4c3b-880d-e65220f8085b)
 
-# Cuarta parte y final: Incorporación numeros hexagecimalesa
+# Cuarta parte y final: Incorporación numeros hexagecimales
 
 ![hexagecimales](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/ebfeba0a-4a11-4040-912a-b37a7c715c03)
 
