@@ -236,14 +236,26 @@ void printHexNumber(int number)
 ~~~
 En esta parte del codigo lo que hace inicialmente, es apagar tanto el display de unidades como el de decenas, luego divide por 16 para obtener el dígito que representa las decenas en formato hexadecimal y se encienden los displays correspondientes, vuelven a apagarse los leds, para luego obtener el dígito de las unidades calculando el resto de la división del número por 16.
 
-Se agregan las letras A a F en los casos del 10 al 15 para que los mismos puedan aparecer en los leds, declaradas en la función 
+Se agregan las letras A a F en los casos para que los mismos puedan aparecer en los leds, declaradas en la función 
 ~~~C
 void printDigit(int digit)
 ~~~
 
 Y por ultimo 
 ~~~C
-else if (modo == 0)
+else if (modo == 0) { // Modo activo de números hexadecimales
+    digitalWrite(motor, LOW);
+    printHexNumber(countDigit); 
+    
+    if (pressed == UPbttn) {
+      countDigit++;
+      if (countDigit > 99) {
+        countDigit = 0;
+      }
+    } else if (pressed == DOWNbttn) {
+      countDigit--;
+      if (countDigit < 0) {
+        countDigit = 99; 
 ~~~
 
 Se selecciona el modo para que en el contador aparezchan dichos numeros. El motor se apaga y se verifica si se han presionado los botones "UP" o "DOWN". Dependiendo de la acción del usuario, se aumenta o disminuye countDigit en función de las condiciones establecidas. Si countDigit supera 99, se reinicia a 0 para volver al inicio. Si countDigit es menor que 0, se reinicia a 99 para volver al último número hexadecimal
