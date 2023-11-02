@@ -258,7 +258,7 @@ else if (modo == 0) { // Modo activo de números hexadecimales
         countDigit = 99; 
 ~~~
 
-Se selecciona el modo para que en el contador aparezchan dichos numeros. El motor se apaga y se verifica si se han presionado los botones "UP" o "DOWN". Dependiendo de la acción del usuario, se aumenta o disminuye countDigit en función de las condiciones establecidas. Si countDigit supera 99, se reinicia a 0 para volver al inicio. Si countDigit es menor que 0, se reinicia a 99 para volver al último número hexadecimal
+Si el interruptor esta en el modo 0, significa que deben aparecer los numeros hexdecimales en el contador. El motor se apaga y se verifica si se han presionado los botones "UP" o "DOWN". Dependiendo de la acción del usuario, se aumenta o disminuye countDigit en función de las condiciones establecidas. Si countDigit supera 99, se reinicia a 0 para volver al inicio. Si countDigit es menor que 0, se reinicia a 99 para volver al último número hexadecimal
 
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
