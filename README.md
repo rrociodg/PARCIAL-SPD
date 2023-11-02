@@ -169,10 +169,6 @@ El motor de corriente continua es un dispositivo con la capacidad de convertir e
 * Fototransistor
 ![fototransistor](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/46425e79-d942-4c3b-880d-e65220f8085b)
 
-# Cuarta parte y final: Incorporación numeros hexagecimales
-
-![hexagecimales](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/ebfeba0a-4a11-4040-912a-b37a7c715c03)
-
 ## Funcion del fotodiodo
 Un fotodiodo es un dispositivo semiconductor que, en términos sencillos, es como un pequeño sensor de luz. Está diseñado para convertir la luz en electricidad. Funciona en base al principio del "efecto fotovoltaico", lo que significa que cuando la luz incide sobre él, genera electricidad. El fotodiodo, en este proyecto, se utiliza para medir la intensidad de la luz en el entorno. El valor leído por el fotodiodo se convierte en una señal eléctrica que se puede usar para diferentes decisiones. La lectura de la intensidad de la luz mediante el fotodiodo se realiza de la siguiente manera:
 ~~~ C
@@ -209,8 +205,48 @@ if (valortstor < 60) {
     }
 ~~~
 
+# Cuarta parte y final: Incorporación numeros hexadecimales
 
+![hexagecimales](https://github.com/rrociodg/PARCIAL-SPD/assets/139300487/ebfeba0a-4a11-4040-912a-b37a7c715c03)
 
+## Descripción
+En esta ultima parte del parcial se solicito eliminar la opción de los numeros primos y que el mismo sea reemplazado para mostrar los numeros hexadecimales disponibles desde el 0 al 99. 
+
+## Función principal
+Para hacer que el codigo funcione y sea lo más optimo posible se eliminaron las funciones relacionadas a el calulo de los numeros primos. 
+
+~~~C
+bool esPrimo(int n) 
+int siguientePrimo(int n
+int anteriorPrimo(int n)
+~~~
+
+Y las mismas fueron reemplazadas por 
+
+~~~ C
+void printHexNumber(int number) 
+{
+    prendeDigito(APAGADOS); 
+    printDigit(number / 16); // Muestra el dígito de las decenas
+    prendeDigito(DECENA); 
+  	prendeDigito(APAGADOS);
+    printDigit(number % 16); // Muestra el dígito de las unidades
+  	prendeDigito(UNIDAD);
+}
+~~~
+En esta parte del codigo lo que hace inicialmente, es apagar tanto el display de unidades como el de decenas, luego divide por 16 para obtener el dígito que representa las decenas en formato hexadecimal y se encienden los displays correspondientes, vuelven a apagarse los leds, para luego obtener el dígito de las unidades calculando el resto de la división del número por 16.
+
+Se agregan las letras A a F en los casos del 10 al 15 para que los mismos puedan aparecer en los leds, declaradas en la función 
+~~~C
+void printDigit(int digit)
+~~~
+
+Y por ultimo 
+~~~C
+else if (modo == 0)
+~~~
+
+Se selecciona el modo para que en el contador aparezchan dichos numeros. El motor se apaga y se verifica si se han presionado los botones "UP" o "DOWN". Dependiendo de la acción del usuario, se aumenta o disminuye countDigit en función de las condiciones establecidas. Si countDigit supera 99, se reinicia a 0 para volver al inicio. Si countDigit es menor que 0, se reinicia a 99 para volver al último número hexadecimal
 
 ## :computer: Link a las partes del proyecto
 - [PARTE1](https://www.tinkercad.com/things/lmmY99UTZsH-parte1-parcial-/editel)
